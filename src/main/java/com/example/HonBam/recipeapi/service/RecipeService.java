@@ -25,4 +25,9 @@ public class RecipeService {
         return findList.stream().map(RecipeDetailResponseDTO::new).collect(Collectors.toList());
     }
 
+    public List<RecipeDetailResponseDTO> searchRecipes(String name) {
+        List<Recipe> searchResults = recipeRepository.findByCocktailNameContainingIgnoreCase(name);
+        log.info("검색한 결과 {}", searchResults);
+        return searchResults.stream().map(RecipeDetailResponseDTO::new).collect(Collectors.toList());
+    }
 }

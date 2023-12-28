@@ -29,6 +29,4 @@ public class Recipe {
     @Column(name = "recipe_detail")
     private String recipeDetail;
 
-
-
 }

@@ -1,5 +1,6 @@
 package com.example.HonBam.recipeapi.repository;
 
+import com.example.HonBam.recipeapi.dto.response.RecipeDetailResponseDTO;
 import com.example.HonBam.recipeapi.entity.Recipe;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

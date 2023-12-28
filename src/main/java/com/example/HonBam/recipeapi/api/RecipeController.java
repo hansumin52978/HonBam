@@ -4,12 +4,8 @@ import com.example.HonBam.recipeapi.dto.response.RecipeDetailResponseDTO;
 import com.example.HonBam.recipeapi.service.RecipeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,11 +25,22 @@ public class RecipeController {
             List<RecipeDetailResponseDTO> allRecipes = recipeService.getAllRecipes();
             return ResponseEntity.ok().body(allRecipes);
         } catch (Exception e) {
-//            e.printStackTrace();
+            e.printStackTrace();
             log.error("Error fetching recipes", e);
-//            return  ResponseEntity.badRequest().body(e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to fetch recipes");
+            return  ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<?> search(@RequestParam String name) {
+        try {
+            List<RecipeDetailResponseDTO> searchResults = recipeService.searchRecipes(name);
+            return ResponseEntity.ok().body(searchResults);
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error("Error searching recipes", e);
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+
+    }
 }
